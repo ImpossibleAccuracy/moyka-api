@@ -1,0 +1,22 @@
+ktor:
+  development: "$DEV:true"
+  application:
+    modules:
+      - org.ksystem.app.MainKt.module
+  deployment:
+    port: "$PORT:8080"
+    watch:
+      - classes
+      - resources
+
+app:
+  database:
+    url: "$DATABASE_URL"
+    user: "$DATABASE_USER"
+    password: "$DATABASE_PASSWORD"
+    poolSize: "$POOL_SIZE:6"
+  token:
+    secret: "$JWT_SECRET"
+    issuer: "$JWT_ISSUER"
+    audience: "$JWT_AUDIENCE"
+    ttl: "$JWT_TTL:3600000"
