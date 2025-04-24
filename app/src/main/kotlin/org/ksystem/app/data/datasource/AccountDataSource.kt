@@ -8,11 +8,11 @@ import org.ksystem.app.data.database.table.AccountTable
 import org.ksystem.app.data.database.utils.exists
 import org.ksystem.app.data.database.utils.findSingle
 import org.ksystem.app.data.model.AccountEntity
-import org.ksystem.app.domain.model.Account
+import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.model.Id
 import org.ksystem.app.utils.ioCall
 
-class AccountDataSource : CrudDataSource<Account, AccountEntity>(AccountDao) {
+class AccountDataSource : CrudDataSource<AccountDomain, AccountEntity>(AccountDao) {
     suspend fun existsByUsername(username: String): Boolean = ioCall {
         AccountDao.exists(AccountTable.username eq username)
     }
@@ -24,7 +24,7 @@ class AccountDataSource : CrudDataSource<Account, AccountEntity>(AccountDao) {
         )
     }
 
-    suspend fun findByUsername(username: String): Account? = ioCall {
+    suspend fun findByUsername(username: String): AccountDomain? = ioCall {
         AccountDao.findSingle(AccountTable.username eq username)
     }
 }

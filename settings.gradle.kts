@@ -1,4 +1,4 @@
-rootProject.name = "KSystem"
+rootProject.name = "MoySam"
 
 pluginManagement {
     repositories {

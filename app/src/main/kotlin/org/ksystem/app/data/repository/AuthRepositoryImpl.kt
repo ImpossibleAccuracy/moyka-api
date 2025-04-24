@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import org.ksystem.app.domain.constants.JWTConstants
 import org.ksystem.app.domain.exception.InvalidInputException
 import org.ksystem.app.domain.exception.OperationRejectedException
-import org.ksystem.app.domain.model.Account
+import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.model.properties.TokenProperties
 import org.ksystem.app.domain.repository.AccountRepository
 import org.ksystem.app.domain.repository.AuthRepository
@@ -18,7 +18,7 @@ class AuthRepositoryImpl(
     private val passwordManager: PasswordManager,
     private val tokenProperties: TokenProperties,
 ) : AuthRepository {
-    override suspend fun signIn(username: String, password: String): Result<Account> = runCatching {
+    override suspend fun signIn(username: String, password: String): Result<AccountDomain> = runCatching {
         accountRepository
             .getAccount(username)
             .getOrNull()
@@ -27,7 +27,7 @@ class AuthRepositoryImpl(
             } ?: throw OperationRejectedException("Invalid credentials")
     }
 
-    override suspend fun signUp(username: String, password: String): Result<Account> =
+    override suspend fun signUp(username: String, password: String): Result<AccountDomain> =
         accountRepository
             .existsByUsername(username)
             .let { exists ->
@@ -60,7 +60,7 @@ class AuthRepositoryImpl(
             )
         }
 
-    override suspend fun generateToken(account: Account): Result<String> = runCatchingWithContext {
+    override suspend fun generateToken(account: AccountDomain): Result<String> = runCatchingWithContext {
         JWT.create()
             .withAudience(tokenProperties.audience)
             .withIssuer(tokenProperties.issuer)

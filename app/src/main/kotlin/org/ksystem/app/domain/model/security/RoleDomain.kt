@@ -1,6 +1,6 @@
 package org.ksystem.app.domain.model.security
 
-enum class Role(
+enum class RoleDomain(
     val roleName: String,
 ) {
     USER("User"),

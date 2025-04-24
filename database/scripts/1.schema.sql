@@ -1,28 +1,34 @@
-CREATE TABLE `role` (
-  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE "account" (
+  "id" SERIAL NOT NULL,
+  "login" varchar NOT NULL,
+  "password" varchar NOT NULL,
+  "first_name" varchar NOT NULL,
+  "middle_name" varchar NOT NULL,
+  "last_name" varchar NOT NULL,
+  "email" varchar NOT NULL,
+  "phone" varchar NOT NULL,
+  "role" varchar NOT NULL,
+  PRIMARY KEY ("id")
 );
 
-CREATE TABLE `account` (
-  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+CREATE TABLE "service" (
+  "id" SERIAL NOT NULL,
+  "name" varchar NOT NULL,
+  PRIMARY KEY ("id")
 );
 
-CREATE TABLE `role_account` (
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `role_id` int NOT NULL,
-  `account_id` int NOT NULL,
-  PRIMARY KEY (`role_id`, `account_id`)
+CREATE TABLE "order" (
+  "id" SERIAL NOT NULL,
+  "account_id" int NOT NULL,
+  "service_id" int NOT NULL,
+  "address" varchar NOT NULL,
+  "contacts" varchar NOT NULL,
+  "delivery_date" timestamp NOT NULL,
+  "payment_type" varchar NOT NULL,
+  "status" varchar NOT NULL,
+  PRIMARY KEY ("id")
 );
 
-CREATE UNIQUE INDEX `title` ON `role` (`title`);
+ALTER TABLE "order" ADD FOREIGN KEY ("account_id") REFERENCES "account" ("id");
 
-CREATE UNIQUE INDEX `username` ON `account` (`username`);
-
-ALTER TABLE `role_account` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE;
-
-ALTER TABLE `role_account` ADD FOREIGN KEY (`account_id`) REFERENCES `account` (`id`) ON DELETE CASCADE;
+ALTER TABLE "order" ADD FOREIGN KEY ("service_id") REFERENCES "service" ("id");

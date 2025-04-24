@@ -6,7 +6,7 @@ import io.ktor.server.auth.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.get
-import org.ksystem.app.domain.model.Account
+import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.repository.AccountRepository
 import org.ksystem.app.server.feature.acount.AccountRoute
 import org.ksystem.app.server.security.requireAccount
@@ -29,7 +29,7 @@ internal fun Routing.deleteMeRoute() {
 }
 
 suspend fun deleteMeRoute(
-    account: Account,
+    account: AccountDomain,
     accountRepository: AccountRepository,
 ) = endpoint {
     accountRepository

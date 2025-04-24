@@ -6,7 +6,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.get
-import org.ksystem.app.domain.model.Account
+import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.repository.AccountRepository
 import org.ksystem.app.server.feature.acount.AccountRoute
 import org.ksystem.app.server.mapper.toDto
@@ -33,7 +33,7 @@ internal fun Routing.updateMeRoute() {
 }
 
 suspend fun updateMeRoute(
-    account: Account,
+    account: AccountDomain,
     data: UpdateAccountRequest,
     accountRepository: AccountRepository,
 ): AccountDto = endpoint {

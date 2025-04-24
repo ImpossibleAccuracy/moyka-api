@@ -6,8 +6,8 @@ import org.ksystem.app.data.base.BaseDao
 import org.ksystem.app.data.base.ModelImpl
 import org.ksystem.app.data.database.utils.exists
 import org.ksystem.app.data.exceptions.EntityNotFoundException
-import org.ksystem.app.domain.model.BaseModel
 import org.ksystem.app.domain.model.Id
+import org.ksystem.app.domain.model.base.BaseModel
 import org.ksystem.app.utils.ioCall
 
 @Suppress("UNCHECKED_CAST")

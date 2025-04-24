@@ -2,25 +2,25 @@ package org.ksystem.app.data.repository
 
 import org.ksystem.app.data.datasource.AccountDataSource
 import org.ksystem.app.domain.exception.ResourceNotFoundException
-import org.ksystem.app.domain.model.Account
+import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.repository.AccountRepository
 import org.ksystem.app.domain.utils.require
 
 class AccountRepositoryImpl(
     private val accountDataSource: AccountDataSource,
 ) : AccountRepository {
-    override suspend fun createAccount(username: String, password: String): Result<Account> = runCatching {
+    override suspend fun createAccount(username: String, password: String): Result<AccountDomain> = runCatching {
         accountDataSource.save {
             this.username = username
             this.password = password
         }
     }
 
-    override suspend fun getAccount(id: Int): Result<Account> = runCatching {
+    override suspend fun getAccount(id: Int): Result<AccountDomain> = runCatching {
         accountDataSource.findById(id).require()
     }
 
-    override suspend fun getAccount(username: String): Result<Account> = runCatching {
+    override suspend fun getAccount(username: String): Result<AccountDomain> = runCatching {
         accountDataSource.findByUsername(username).require()
     }
 
@@ -28,7 +28,7 @@ class AccountRepositoryImpl(
         return accountDataSource.existsByUsername(username)
     }
 
-    override suspend fun updateAccount(id: Int, username: String): Result<Account> = runCatching {
+    override suspend fun updateAccount(id: Int, username: String): Result<AccountDomain> = runCatching {
         if (accountDataSource.existsByUsernameEqAndIdNotEq(username, id)) {
             throw ResourceNotFoundException("Username already used")
         }

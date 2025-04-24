@@ -1,9 +1,9 @@
 package org.ksystem.app.domain.utils
 
 import org.ksystem.app.domain.exception.ResourceNotFoundException
-import org.ksystem.app.domain.model.Account
+import org.ksystem.app.domain.model.AccountDomain
 
-fun Account?.require(): Account =
+fun AccountDomain?.require(): AccountDomain =
     require("Account not found")
 
 private fun <T> T?.require(message: String): T {
