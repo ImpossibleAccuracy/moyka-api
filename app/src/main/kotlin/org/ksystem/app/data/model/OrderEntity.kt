@@ -9,13 +9,13 @@ import org.ksystem.app.domain.model.OrderDomain
 
 class OrderEntity(id: EntityID<Id>) : OrderDomain, ModelImpl(id, OrderTable) {
     private var accountIdEntity by OrderTable.accountId
-    private var serviceIdEntity by OrderTable.accountId
     override var accountId: Id
         get() = accountIdEntity.value
         set(value) {
             accountIdEntity._value = value
         }
 
+    private var serviceIdEntity by OrderTable.serviceId
     override var serviceId: Id
         get() = serviceIdEntity.value
         set(value) {
@@ -27,4 +27,5 @@ class OrderEntity(id: EntityID<Id>) : OrderDomain, ModelImpl(id, OrderTable) {
     override var deliveryDate: LocalDateTime by OrderTable.deliveryDate
     override var paymentType: String by OrderTable.paymentType
     override var status: String by OrderTable.status
+    override var rejectReason: String? by OrderTable.rejectReason
 }

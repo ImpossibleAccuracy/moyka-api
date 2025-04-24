@@ -11,4 +11,5 @@ interface OrderDomain : BaseModel {
     var deliveryDate: LocalDateTime
     var paymentType: String
     var status: String
+    var rejectReason: String?
 }

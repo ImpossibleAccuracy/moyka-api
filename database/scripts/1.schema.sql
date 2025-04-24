@@ -26,6 +26,7 @@ CREATE TABLE "order" (
   "delivery_date" timestamp NOT NULL,
   "payment_type" varchar NOT NULL,
   "status" varchar NOT NULL,
+  "reject_reason" varchar,
   PRIMARY KEY ("id")
 );
 

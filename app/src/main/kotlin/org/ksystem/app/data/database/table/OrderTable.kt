@@ -11,4 +11,5 @@ object OrderTable : BaseTable("order") {
     val deliveryDate = datetime("delivery_date")
     val paymentType = varchar("payment_type", 255)
     val status = varchar("status", 255)
+    val rejectReason = varchar("reject_reason", 255).nullable()
 }

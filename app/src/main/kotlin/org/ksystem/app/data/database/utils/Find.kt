@@ -6,4 +6,4 @@ import org.jetbrains.exposed.sql.Op
 
 
 fun <ID : Comparable<ID>, T : Entity<ID>> EntityClass<ID, T>.findSingle(op: Op<Boolean>): T? =
-    find(op).firstOrNull()
+    find(op).limit(1).firstOrNull()
