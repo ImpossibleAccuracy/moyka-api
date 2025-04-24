@@ -3,7 +3,9 @@ package org.ksystem.app.data.model
 import kotlinx.datetime.LocalDateTime
 import org.jetbrains.exposed.dao.id.EntityID
 import org.ksystem.app.data.base.ModelImpl
+import org.ksystem.app.data.database.table.AccountTable
 import org.ksystem.app.data.database.table.OrderTable
+import org.ksystem.app.data.database.table.ServiceTable
 import org.ksystem.app.domain.model.Id
 import org.ksystem.app.domain.model.OrderDomain
 
@@ -12,14 +14,14 @@ class OrderEntity(id: EntityID<Id>) : OrderDomain, ModelImpl(id, OrderTable) {
     override var accountId: Id
         get() = accountIdEntity.value
         set(value) {
-            accountIdEntity._value = value
+            accountIdEntity = EntityID(value, AccountTable)
         }
 
     private var serviceIdEntity by OrderTable.serviceId
     override var serviceId: Id
         get() = serviceIdEntity.value
         set(value) {
-            serviceIdEntity._value = value
+            serviceIdEntity = EntityID(value, ServiceTable)
         }
 
     override var address: String by OrderTable.address

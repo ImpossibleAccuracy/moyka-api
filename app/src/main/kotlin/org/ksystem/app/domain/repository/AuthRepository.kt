@@ -5,7 +5,15 @@ import org.ksystem.app.domain.model.AccountDomain
 interface AuthRepository {
     suspend fun signIn(username: String, password: String): Result<AccountDomain>
 
-    suspend fun signUp(username: String, password: String): Result<AccountDomain>
+    suspend fun signUp(
+        username: String,
+        password: String,
+        firstName: String,
+        middleName: String,
+        lastName: String,
+        email: String,
+        phone: String,
+    ): Result<AccountDomain>
 
     suspend fun refreshToken(token: String): Result<RefreshedToken>
 

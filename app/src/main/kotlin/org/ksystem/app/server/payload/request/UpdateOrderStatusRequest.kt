@@ -1,15 +1,13 @@
 package org.ksystem.app.server.payload.request
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.ksystem.app.domain.model.Id
 
-@Serializable
 data class UpdateOrderStatusRequest(
-    @SerialName("order_id")
+    @field:JsonProperty("order_id")
     var orderId: Id,
-    @SerialName("status")
+    @field:JsonProperty("status")
     var status: String,
-    @SerialName("reject_reason")
+    @field:JsonProperty("reject_reason")
     var rejectReason: String? = null,
 )

@@ -5,19 +5,22 @@ import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.koin.ktor.ext.get
 import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.repository.OrderRepository
 import org.ksystem.app.server.feature.order.OrderRoute
+import org.ksystem.app.server.mapper.toDto
 import org.ksystem.app.server.payload.request.CreateOrderRequest
 import org.ksystem.app.server.security.requireAccount
 import org.ksystem.app.server.utils.endpoint
-import org.ksystem.app.server.utils.typeSafeGet
+import org.ksystem.app.server.utils.typeSafePost
 
 internal fun Routing.createOrderRoute() {
     authenticate {
-        typeSafeGet<OrderRoute.Create> {
+        typeSafePost<OrderRoute.Create> {
             val result = createOrderRoute(
                 account = call.requireAccount(),
                 body = call.receive(),
@@ -34,12 +37,16 @@ private suspend inline fun createOrderRoute(
     body: CreateOrderRequest,
     repository: OrderRepository,
 ) = endpoint {
-    repository.create(
-        account = account,
-        serviceId = body.serviceId,
-        address = body.address,
-        contacts = body.contacts,
-        deliveryDate = LocalDateTime.parse(body.deliveryDate),
-        paymentType = body.paymentType,
-    )
+    repository
+        .create(
+            account = account,
+            serviceId = body.serviceId,
+            address = body.address,
+            contacts = body.contacts,
+            deliveryDate = Instant
+                .fromEpochMilliseconds(body.deliveryDate)
+                .toLocalDateTime(TimeZone.UTC),
+            paymentType = body.paymentType,
+        )
+        .toDto()
 }

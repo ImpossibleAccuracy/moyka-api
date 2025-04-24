@@ -10,12 +10,10 @@ import org.koin.ktor.ext.get
 import org.ksystem.app.domain.constants.JWTConstants
 import org.ksystem.app.domain.model.properties.TokenProperties
 import org.ksystem.app.domain.repository.AccountRepository
-import org.ksystem.app.domain.repository.AuthRepository
 import org.ksystem.app.server.model.AccountPrincipal
 
 internal fun Application.addAuthentication() {
     val tokenProperties = get<TokenProperties>()
-    val authRepository = get<AuthRepository>()
     val accountRepository = get<AccountRepository>()
 
     authentication {

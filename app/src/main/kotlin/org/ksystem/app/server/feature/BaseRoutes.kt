@@ -2,5 +2,5 @@ package org.ksystem.app.server.feature
 
 import io.ktor.resources.*
 
-@Resource("/api")
+@Resource("/v1")
 class BaseRoutes

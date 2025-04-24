@@ -28,7 +28,15 @@ suspend fun signUpRoute(
     authRepository: AuthRepository,
 ): AuthResponse = endpoint {
     val user = authRepository
-        .signUp(body.username, body.password)
+        .signUp(
+            username = body.username,
+            password = body.password,
+            firstName = body.firstName,
+            middleName = body.middleName ?: "",
+            lastName = body.lastName,
+            email = body.email,
+            phone = body.phone,
+        )
         .getOrThrow()
 
     AuthResponse(

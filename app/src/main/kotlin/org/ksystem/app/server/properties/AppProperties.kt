@@ -3,9 +3,13 @@ package org.ksystem.app.server.properties
 import io.ktor.server.application.*
 import org.ksystem.app.domain.model.properties.AppProperties
 import org.ksystem.app.domain.model.properties.DatabaseProperties
+import org.ksystem.app.domain.model.properties.ServerProperties
 import org.ksystem.app.domain.model.properties.TokenProperties
 
 fun ApplicationEnvironment.toAppProperties() = AppProperties(
+    server = ServerProperties(
+        frontendHost = config.property("app.server.frontendHost").getString(),
+    ),
     token = TokenProperties(
         secret = config.property("app.token.secret").getString(),
         issuer = config.property("app.token.issuer").getString(),

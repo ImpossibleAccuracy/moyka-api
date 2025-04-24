@@ -10,6 +10,8 @@ ktor:
       - resources
 
 app:
+  server:
+    frontendHost: "$FRONTEND_HOST"
   database:
     url: "$DATABASE_URL"
     user: "$DATABASE_USER"

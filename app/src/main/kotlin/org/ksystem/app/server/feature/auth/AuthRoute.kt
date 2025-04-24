@@ -7,12 +7,12 @@ import org.ksystem.app.server.feature.BaseRoutes
 class AuthRoute(
     @Suppress("unused") val parent: BaseRoutes = BaseRoutes()
 ) {
-    @Resource("/signin")
+    @Resource("/signIn")
     class SignInRoute(
         @Suppress("unused") val parent: AuthRoute = AuthRoute()
     )
 
-    @Resource("/signup")
+    @Resource("/signUp")
     class SignUpRoute(
         @Suppress("unused") val parent: AuthRoute = AuthRoute()
     )

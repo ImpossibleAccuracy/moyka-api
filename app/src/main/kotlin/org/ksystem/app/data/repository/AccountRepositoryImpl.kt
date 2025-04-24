@@ -3,16 +3,32 @@ package org.ksystem.app.data.repository
 import org.ksystem.app.data.datasource.AccountDataSource
 import org.ksystem.app.domain.exception.ResourceNotFoundException
 import org.ksystem.app.domain.model.AccountDomain
+import org.ksystem.app.domain.model.security.RoleDomain
 import org.ksystem.app.domain.repository.AccountRepository
 import org.ksystem.app.domain.utils.require
 
 class AccountRepositoryImpl(
     private val accountDataSource: AccountDataSource,
 ) : AccountRepository {
-    override suspend fun createAccount(username: String, password: String): Result<AccountDomain> = runCatching {
+    override suspend fun createAccount(
+        username: String,
+        password: String,
+        firstName: String,
+        middleName: String,
+        lastName: String,
+        email: String,
+        phone: String,
+        role: RoleDomain
+    ): Result<AccountDomain> = runCatching {
         accountDataSource.save {
             this.username = username
             this.password = password
+            this.firstName = firstName
+            this.middleName = middleName
+            this.lastName = lastName
+            this.email = email
+            this.phone = phone
+            this.role = role
         }
     }
 

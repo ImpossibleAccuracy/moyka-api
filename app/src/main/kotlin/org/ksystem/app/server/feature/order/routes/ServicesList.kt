@@ -6,6 +6,7 @@ import io.ktor.server.routing.*
 import org.koin.ktor.ext.get
 import org.ksystem.app.domain.repository.ServicesRepository
 import org.ksystem.app.server.feature.order.OrderRoute
+import org.ksystem.app.server.mapper.toDto
 import org.ksystem.app.server.utils.endpoint
 import org.ksystem.app.server.utils.typeSafeGet
 
@@ -22,5 +23,5 @@ internal fun Routing.serviceListRoute() {
 private suspend inline fun serviceListRoute(
     repository: ServicesRepository,
 ) = endpoint {
-    repository.getAll()
+    repository.getAll().map { it.toDto() }
 }

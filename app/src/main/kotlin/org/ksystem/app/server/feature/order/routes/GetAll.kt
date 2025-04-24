@@ -10,6 +10,7 @@ import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.model.security.RoleDomain
 import org.ksystem.app.domain.repository.OrderRepository
 import org.ksystem.app.server.feature.order.OrderRoute
+import org.ksystem.app.server.mapper.toDto
 import org.ksystem.app.server.security.requireAccount
 import org.ksystem.app.server.utils.endpoint
 import org.ksystem.app.server.utils.typeSafeGet
@@ -35,5 +36,5 @@ private suspend inline fun getAllOrdersRoute(
         throw OperationRejectedException("You are not admin")
     }
 
-    repository.getAll()
+    repository.getAll().map { it.toDto() }
 }

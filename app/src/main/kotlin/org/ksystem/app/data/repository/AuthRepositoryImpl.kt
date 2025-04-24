@@ -8,6 +8,7 @@ import org.ksystem.app.domain.exception.InvalidInputException
 import org.ksystem.app.domain.exception.OperationRejectedException
 import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.model.properties.TokenProperties
+import org.ksystem.app.domain.model.security.RoleDomain
 import org.ksystem.app.domain.repository.AccountRepository
 import org.ksystem.app.domain.repository.AuthRepository
 import org.ksystem.app.utils.runCatchingWithContext
@@ -27,20 +28,33 @@ class AuthRepositoryImpl(
             } ?: throw OperationRejectedException("Invalid credentials")
     }
 
-    override suspend fun signUp(username: String, password: String): Result<AccountDomain> =
-        accountRepository
-            .existsByUsername(username)
-            .let { exists ->
-                if (exists) {
-                    throw InvalidInputException("Username already taken")
-                }
+    override suspend fun signUp(
+        username: String,
+        password: String,
+        firstName: String,
+        middleName: String,
+        lastName: String,
+        email: String,
+        phone: String,
+    ): Result<AccountDomain> = accountRepository
+        .existsByUsername(username)
+        .let { exists ->
+            if (exists) {
+                throw InvalidInputException("Username already taken")
             }
-            .let {
-                accountRepository.createAccount(
-                    username = username,
-                    password = passwordManager.encrypt(password),
-                )
-            }
+        }
+        .let {
+            accountRepository.createAccount(
+                username = username,
+                password = passwordManager.encrypt(password),
+                firstName = firstName,
+                middleName = middleName,
+                lastName = lastName,
+                email = email,
+                phone = phone,
+                role = RoleDomain.USER,
+            )
+        }
 
     override suspend fun refreshToken(token: String): Result<AuthRepository.RefreshedToken> =
         runCatchingWithContext(Dispatchers.Default) {

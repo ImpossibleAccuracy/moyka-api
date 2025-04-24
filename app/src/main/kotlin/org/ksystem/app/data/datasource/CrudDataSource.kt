@@ -1,5 +1,6 @@
 package org.ksystem.app.data.datasource
 
+import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.ksystem.app.data.base.BaseDao
@@ -39,7 +40,9 @@ abstract class CrudDataSource<T : BaseModel, I : ModelImpl>(
     }
 
     suspend fun getAll(): List<T> = ioCall {
-        dao.all().toList() as List<T>
+        dao.all()
+            .orderBy(dao.table.id to SortOrder.DESC)
+            .toList() as List<T>
     }
 
     suspend fun deleteById(id: Id): Boolean = ioCall {

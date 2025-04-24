@@ -1,19 +1,17 @@
 package org.ksystem.app.server.payload.request
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.ksystem.app.domain.model.Id
 
-@Serializable
 data class CreateOrderRequest(
-    @SerialName("service_id")
+    @field:JsonProperty("service_id")
     var serviceId: Id,
-    @SerialName("address")
+    @field:JsonProperty("address")
     var address: String,
-    @SerialName("contacts")
+    @field:JsonProperty("contacts")
     var contacts: String,
-    @SerialName("delivery_date")
-    var deliveryDate: String,
-    @SerialName("payment_type")
+    @field:JsonProperty("delivery_date")
+    var deliveryDate: Long,
+    @field:JsonProperty("payment_type")
     var paymentType: String,
 )

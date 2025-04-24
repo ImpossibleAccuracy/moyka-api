@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.ktor.contentNegotiation)
     implementation(libs.ktor.resources)
     implementation(libs.ktor.statusPages)
+    implementation(libs.ktor.cors)
     implementation(libs.ktor.auth)
     implementation(libs.ktor.authJwt)
     implementation(libs.ktor.websockets)
@@ -41,7 +42,7 @@ dependencies {
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)
     implementation(libs.exposed.datetime)
-    implementation(libs.mysqlConnector)
+    implementation(libs.postgresConnector)
     implementation(libs.hikariCP)
 
     implementation(libs.log4j.core)

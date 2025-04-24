@@ -22,7 +22,7 @@ fun Application.module() {
     configureMonitoring()
     configureSerialization()
     configureSecurity()
-    configureRouting()
+    configureRouting(properties)
 
     setupApiRoutes()
 }

@@ -1,12 +1,22 @@
 package org.ksystem.app.server.payload.dto
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
 data class AccountDto(
-    @SerialName("id")
+    @field:JsonProperty("id")
     val id: RemoteId,
-    @SerialName("username")
+    @field:JsonProperty("username")
     val username: String,
+    @field:JsonProperty("firstName")
+    var firstName: String,
+    @field:JsonProperty("middleName")
+    var middleName: String,
+    @field:JsonProperty("lastName")
+    var lastName: String,
+    @field:JsonProperty("email")
+    var email: String,
+    @field:JsonProperty("phone")
+    var phone: String,
+    @field:JsonProperty("role")
+    var role: String,
 )

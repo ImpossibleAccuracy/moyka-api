@@ -16,11 +16,11 @@ import org.ksystem.app.server.feature.order.OrderRoute
 import org.ksystem.app.server.payload.request.UpdateOrderStatusRequest
 import org.ksystem.app.server.security.requireAccount
 import org.ksystem.app.server.utils.endpoint
-import org.ksystem.app.server.utils.typeSafeGet
+import org.ksystem.app.server.utils.typeSafePut
 
 internal fun Routing.updateOrderStatusRoute() {
     authenticate {
-        typeSafeGet<OrderRoute.Create> {
+        typeSafePut<OrderRoute.UpdateStatus> {
             val result = updateOrderStatusRoute(
                 account = call.requireAccount(),
                 body = call.receive(),

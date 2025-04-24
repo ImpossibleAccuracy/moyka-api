@@ -8,6 +8,7 @@ import org.koin.ktor.ext.get
 import org.ksystem.app.domain.model.AccountDomain
 import org.ksystem.app.domain.repository.OrderRepository
 import org.ksystem.app.server.feature.order.OrderRoute
+import org.ksystem.app.server.mapper.toDto
 import org.ksystem.app.server.security.requireAccount
 import org.ksystem.app.server.utils.endpoint
 import org.ksystem.app.server.utils.typeSafeGet
@@ -29,5 +30,5 @@ private suspend inline fun getMyOrdersRoute(
     account: AccountDomain,
     repository: OrderRepository,
 ) = endpoint {
-    repository.getByAccount(account)
+    repository.getByAccount(account).map { it.toDto() }
 }

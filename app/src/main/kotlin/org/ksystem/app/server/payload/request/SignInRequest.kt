@@ -1,12 +1,10 @@
 package org.ksystem.app.server.payload.request
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@Serializable
 data class SignInRequest(
-    @SerialName("username")
+    @field:JsonProperty("username")
     val username: String,
-    @SerialName("password")
+    @field:JsonProperty("password")
     val password: String,
 )
