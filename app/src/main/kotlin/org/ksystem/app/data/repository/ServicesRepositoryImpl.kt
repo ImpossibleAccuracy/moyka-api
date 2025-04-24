@@ -1,6 +1,7 @@
 package org.ksystem.app.data.repository
 
 import org.ksystem.app.data.datasource.ServiceDataSource
+import org.ksystem.app.domain.model.Id
 import org.ksystem.app.domain.model.ServiceDomain
 import org.ksystem.app.domain.repository.ServicesRepository
 
@@ -9,4 +10,7 @@ class ServicesRepositoryImpl(
 ) : ServicesRepository {
     override suspend fun getAll(): List<ServiceDomain> =
         serviceDataSource.getAll()
+
+    override suspend fun exists(id: Id): Boolean =
+        serviceDataSource.existsById(id)
 }
