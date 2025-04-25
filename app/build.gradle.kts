@@ -13,6 +13,10 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
+tasks.jar {
+    archiveFileName.set("app.jar")
+}
+
 dependencies {
     implementation(libs.kotlin.datetime)
     implementation(libs.kotlin.collections)
